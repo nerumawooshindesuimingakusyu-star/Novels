@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>三浦香月 — 小説</title>
+<meta name="description" content="三浦香月の小説作品集">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700&family=Noto+Serif+JP:wght@300;400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0c0b0a;
+    --surface: #141210;
+    --surface2: #1a1714;
+    --border: #272320;
+    --border2: #322e2a;
+    --text: #c4bdb4;
+    --text-dim: #857d74;
+    --text-faint: #4a4540;
+    --accent: #967a56;
+    --accent-light: #c4a47a;
+    --cream: #e8dfd4;
+    --cream-dim: #b8afa6;
+    --red: #8b4a3a;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 300;
+    line-height: 1.9;
+    min-height: 100vh;
+    cursor: default;
+  }
+
+  /* grain */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 22px 48px;
+    background: linear-gradient(to bottom, var(--bg) 60%, transparent);
+  }
+
+  .nav-name {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--cream);
+    letter-spacing: 0.15em;
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 11px;
+    color: var(--text-dim);
+    text-decoration: none;
+    letter-spacing: 0.2em;
+    transition: color 0.3s;
+  }
+
+  .nav-links a:hover { color: var(--accent-light); }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 48px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-line {
+    position: absolute;
+    top: 0; bottom: 0;
+    left: 48px;
+    width: 1px;
+    background: linear-gradient(to bottom, transparent, var(--border2) 30%, var(--border2) 70%, transparent);
+  }
+
+  .hero-eyebrow {
+    font-family: 'DM Serif Display', serif;
+    font-style: italic;
+    font-size: 12px;
+    color: var(--accent);
+    letter-spacing: 0.3em;
+    margin-bottom: 24px;
+    padding-left: 72px;
+    animation: fadeUp 1.2s ease forwards;
+    opacity: 0;
+  }
+
+  .hero-title {
+    font-family: 'Shippori Mincho', serif;
+    font-size: clamp(52px, 10vw, 110px);
+    font-weight: 700;
+    color: var(--cream);
+    line-height: 1.1;
+    letter-spacing: 0.06em;
+    padding-left: 72px;
+    animation: fadeUp 1.2s 0.15s ease forwards;
+    opacity: 0;
+  }
+
+  .hero-subtitle {
+    font-size: 13px;
+    color: var(--text-dim);
+    letter-spacing: 0.2em;
+    padding-left: 72px;
+    margin-top: 20px;
+    animation: fadeUp 1.2s 0.3s ease forwards;
+    opacity: 0;
+  }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 40px;
+    right: 48px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--text-faint);
+    writing-mode: vertical-rl;
+    animation: fadeIn 2s 1s ease forwards;
+    opacity: 0;
+  }
+
+  .hero-scroll::before {
+    content: '';
+    width: 1px;
+    height: 60px;
+    background: linear-gradient(to bottom, var(--text-faint), transparent);
+  }
+
+  /* ── WORKS LIST ── */
+  #works {
+    padding: 80px 0 120px;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding-left: 48px;
+    padding-right: 48px;
+  }
+
+  .section-label {
+    font-family: 'DM Serif Display', serif;
+    font-style: italic;
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.3em;
+    margin-bottom: 48px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .works-grid {
+    display: grid;
+    gap: 0;
+  }
+
+  .work-item {
+    display: grid;
+    grid-template-columns: 64px 1fr auto;
+    align-items: start;
+    gap: 0 32px;
+    padding: 40px 0;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    transition: background 0.4s;
+    position: relative;
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.6s ease, transform 0.6s ease, background 0.3s;
+  }
+
+  .work-item.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .work-item::before {
+    content: '';
+    position: absolute;
+    left: -48px; right: -48px;
+    top: 0; bottom: 0;
+    background: var(--surface);
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+  }
+
+  .work-item:hover::before { opacity: 1; }
+
+  .work-num {
+    font-family: 'DM Serif Display', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--text-faint);
+    letter-spacing: 0.1em;
+    padding-top: 4px;
+    position: relative;
+    z-index: 1;
+    transition: color 0.3s;
+  }
+
+  .work-item:hover .work-num { color: var(--accent); }
+
+  .work-body { position: relative; z-index: 1; }
+
+  .work-title {
+    font-family: 'Shippori Mincho', serif;
+    font-size: clamp(20px, 3vw, 26px);
+    font-weight: 600;
+    color: var(--cream);
+    letter-spacing: 0.1em;
+    margin-bottom: 10px;
+    transition: color 0.3s;
+  }
+
+  .work-item:hover .work-title { color: var(--accent-light); }
+
+  .work-catch {
+    font-size: 12px;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    margin-bottom: 14px;
+    border-left: 2px solid var(--accent);
+    padding-left: 12px;
+  }
+
+  .work-desc {
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 2;
+    letter-spacing: 0.04em;
+    max-width: 560px;
+    margin-bottom: 18px;
+  }
+
+  .work-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .work-tag {
+    font-size: 10px;
+    color: var(--text-faint);
+    border: 1px solid var(--border2);
+    padding: 3px 10px;
+    letter-spacing: 0.08em;
+    transition: all 0.3s;
+  }
+
+  .work-item:hover .work-tag {
+    color: var(--text-dim);
+    border-color: var(--border2);
+  }
+
+  .work-arrow {
+    position: relative;
+    z-index: 1;
+    font-size: 18px;
+    color: var(--text-faint);
+    padding-top: 6px;
+    transition: all 0.3s;
+    font-family: serif;
+  }
+
+  .work-item:hover .work-arrow {
+    color: var(--accent-light);
+    transform: translateX(4px);
+  }
+
+  /* loading spinner */
+  .loading {
+    text-align: center;
+    padding: 80px;
+    color: var(--text-faint);
+    font-size: 13px;
+    letter-spacing: 0.2em;
+  }
+
+  .error-msg {
+    text-align: center;
+    padding: 60px;
+    color: var(--red);
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    line-height: 2;
+  }
+
+  /* ── MODAL (本文) ── */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(12, 11, 10, 0.92);
+    z-index: 200;
+    display: flex;
+    align-items: stretch;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+    backdrop-filter: blur(4px);
+  }
+
+  .modal-overlay.open {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .modal {
+    background: var(--surface);
+    width: 100%;
+    max-width: 760px;
+    margin: 0 auto;
+    overflow-y: auto;
+    position: relative;
+    transform: translateY(30px);
+    transition: transform 0.4s ease;
+    border-left: 1px solid var(--border2);
+    border-right: 1px solid var(--border2);
+  }
+
+  .modal-overlay.open .modal {
+    transform: translateY(0);
+  }
+
+  .modal-header {
+    position: sticky;
+    top: 0;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 24px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 10;
+  }
+
+  .modal-header-title {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--cream);
+    letter-spacing: 0.12em;
+  }
+
+  .modal-close {
+    background: none;
+    border: 1px solid var(--border2);
+    color: var(--text-dim);
+    font-size: 18px;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  .modal-close:hover {
+    border-color: var(--accent);
+    color: var(--accent-light);
+  }
+
+  .modal-body {
+    padding: 56px 48px 80px;
+  }
+
+  .modal-catch {
+    font-size: 13px;
+    color: var(--accent-light);
+    letter-spacing: 0.12em;
+    border-left: 2px solid var(--accent);
+    padding-left: 16px;
+    margin-bottom: 48px;
+    line-height: 1.8;
+  }
+
+  .modal-text {
+    font-size: 15px;
+    line-height: 2.2;
+    color: var(--text);
+    letter-spacing: 0.05em;
+    white-space: pre-wrap;
+  }
+
+  .modal-text p {
+    margin-bottom: 1.6em;
+  }
+
+  .modal-footer {
+    padding: 32px 48px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .modal-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+
+  .modal-tag {
+    font-size: 10px;
+    color: var(--text-faint);
+    border: 1px solid var(--border2);
+    padding: 4px 12px;
+    letter-spacing: 0.08em;
+  }
+
+  .modal-nav {
+    display: flex;
+    gap: 16px;
+  }
+
+  .modal-nav-btn {
+    background: none;
+    border: 1px solid var(--border2);
+    color: var(--text-dim);
+    font-size: 11px;
+    padding: 8px 16px;
+    letter-spacing: 0.15em;
+    cursor: pointer;
+    font-family: 'Noto Serif JP', serif;
+    transition: all 0.3s;
+  }
+
+  .modal-nav-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent-light);
+  }
+
+  .modal-nav-btn:disabled {
+    opacity: 0.3;
+    cursor: default;
+  }
+
+  /* ── ABOUT ── */
+  #about {
+    border-top: 1px solid var(--border);
+    padding: 80px 48px 100px;
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .about-label {
+    font-family: 'DM Serif Display', serif;
+    font-style: italic;
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.3em;
+    margin-bottom: 32px;
+  }
+
+  .about-name {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 36px;
+    font-weight: 600;
+    color: var(--cream);
+    letter-spacing: 0.12em;
+    margin-bottom: 24px;
+  }
+
+  .about-text {
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 2.2;
+    letter-spacing: 0.04em;
+  }
+
+  .about-stat {
+    border-top: 1px solid var(--border);
+    padding-top: 48px;
+  }
+
+  .stat-num {
+    font-family: 'DM Serif Display', serif;
+    font-style: italic;
+    font-size: 56px;
+    color: var(--cream);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .stat-label {
+    font-size: 11px;
+    color: var(--text-faint);
+    letter-spacing: 0.2em;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    color: var(--text-faint);
+    letter-spacing: 0.15em;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 700px) {
+    nav { padding: 18px 24px; }
+    .nav-links { display: none; }
+    #hero { padding: 0 24px 64px; }
+    .hero-eyebrow, .hero-title, .hero-subtitle { padding-left: 0; }
+    .hero-line { display: none; }
+    #works { padding: 60px 24px 80px; }
+    .work-item { grid-template-columns: 40px 1fr auto; gap: 0 16px; }
+    #about { grid-template-columns: 1fr; gap: 40px; padding: 60px 24px; }
+    .modal-header, .modal-body, .modal-footer { padding-left: 24px; padding-right: 24px; }
+    footer { padding: 24px; flex-direction: column; gap: 8px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-name">三浦香月</a>
+  <ul class="nav-links">
+    <li><a href="#works">作品</a></li>
+    <li><a href="#about">著者</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-line"></div>
+  <p class="hero-eyebrow">Fiction — 三浦香月</p>
+  <h1 class="hero-title">浪する<br>人々</h1>
+  <p class="hero-subtitle">どこにもたどり着けないまま、それでも生きている人々の断章。</p>
+  <div class="hero-scroll">scroll</div>
+</section>
+
+<!-- WORKS -->
+<section id="works">
+  <div class="section-label">Works</div>
+  <div class="works-grid" id="worksGrid">
+    <div class="loading">読み込み中…</div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div>
+    <p class="about-label">Author</p>
+    <h2 class="about-name">三浦香月</h2>
+    <p class="about-text">日常の隙間に潜む、名付けられない感情を書く。<br>浪する人々、収録。</p>
+  </div>
+  <div class="about-stat">
+    <div class="stat-num" id="statNum">—</div>
+    <div class="stat-label">公開作品数</div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span>© 三浦香月</span>
+  <span>All rights reserved</span>
+</footer>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal" id="modal">
+    <div class="modal-header">
+      <span class="modal-header-title" id="modalTitle"></span>
+      <button class="modal-close" id="modalClose">✕</button>
+    </div>
+    <div class="modal-body">
+      <p class="modal-catch" id="modalCatch"></p>
+      <div class="modal-text" id="modalText"></div>
+    </div>
+    <div class="modal-footer">
+      <div class="modal-tags" id="modalTags"></div>
+      <div class="modal-nav">
+        <button class="modal-nav-btn" id="modalPrev">← 前の作品</button>
+        <button class="modal-nav-btn" id="modalNext">次の作品 →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ============================================================
+//  ★ ここをApps ScriptのデプロイURLに書き換える ★
+//  設定方法はREADME.mdを参照してください
+// ============================================================
+const GAS_URL = 'YOUR_GAS_URL_HERE';
+
+// フォールバック用のデータ（シート設定前に表示されるサンプル）
+const FALLBACK_DATA = [
+  {
+    id: 1,
+    title: "浪する人々",
+    catchcopy: "透明になっていく、この体はまだここにある。",
+    description: "浪人という名の宙吊りの時間。仲間たちが光の中へ消えていくなか、ひとりの部屋に残された「僕」は鏡の中の自分と向き合い、砂時計の砂が青い光となって零れ落ちるのを見ている。夢と現の境が溶け、管楽器の匂いとともによみがえる眩しすぎた過去が、今をいっそう深く侵食する。",
+    tags: "#浪人 #喪失 #夢と現実 #孤独",
+    body: `そっと目を開けると、いつも通りの、少し年季の入った日焼けた天井が無機質に存在していた。4月1日。仲間たちは意気揚々と新天地に向かっていった。高校生活3年間をすべて肯定され、それを踏み台にしてさらなる高みへと登っていった。僕はどうだろう。昨日までと変わらない日常が、もう1年間続くのだ。もしかしたら、もう1年では足りないかもしれない。肩に重いものが乗っかっていて、病魔に取り憑かれているように、すべてが僕の制御下に置かれていないようだった。
+
+家族の当たりも強くなり、中流階級ゆえ、より一層この1年間は節制を強いられそうだ。自分の人生は自分で切り開くものだし、他人と比べる必要はないなどと言う人がいるが、そんなことを言い出したら僕は大学になど行かない。山奥にこもって俗世を離れ、幸せを見つけ始めてしまうだろう。どうしたって周りと比べて、自分の方が勝っていると信じたいものだ。その観点で言えば、今の僕は一番下にいる。学生でもないし、もちろん稼ぎもない。ニートやフリーランスと呼ばれている人と同じか、それ以下だと自分をずっと卑下している。
+
+ふと気がつくと、部屋の隅に大きな鏡が立っている。昨日まではなかったはずだが、不思議と驚きはなかった。鏡の中の僕は、机に向かって一心不乱にペンを動かしている。その背中には、黒い霧のような塊がのしかかり、時折、耳元で何かを囁いているようだった。僕は鏡の中の自分に声をかけようとしたが、喉が固まって音が出ない。代わりに、鏡の中の僕がゆっくりとこちらを振り向いた。その顔には目も鼻もなく、ただ白紙の願書が貼り付けられているだけだった。
+
+「お前は、いつまでここにいるつもりだ」
+
+白紙の顔が言った。声は僕自身のものだが、どこか遠い地の底から響いてくるように冷たい。
+
+「もう一年か。それとも百年か。時間はたっぷりある。だが、この部屋の砂時計は、砂の代わりに君の寿命をこぼしているよ」
+
+見れば、机の上にあるはずの参考書が、いつの間にか巨大な砂時計に変わっていた。落ちているのは確かに砂ではなく、透き通った青い光の粒だ。それが一粒落ちるたびに、僕の指先が少しずつ透明になっていく。僕は慌ててその光を掬い上げようとしたが、指をすり抜けて床に吸い込まれてしまう。
+
+外からは、新生活を謳歌する若者たちの笑い声が、風に乗って微かに聞こえてきた。その声が聞こえるたび、肩に乗った「重いもの」が一段と重さを増し、僕の体は床にめり込んでいく。
+
+「こんな夢を見た」
+
+そう呟こうとした瞬間、鏡の中の白紙の僕が、筆を置いて立ち上がった。
+
+床に吸い込まれたはずの青い光の粒は、いつの間にか足元で薄暗い水溜まりのように広がっていた。水面が微かに波打つと、ふわりと、あの特有の匂いが立ち昇ってきた。真鍮の冷たさと、柔らかなグリスの混じったような、管楽器の匂いだ。
+
+仄暗い部屋の床に、かつての眩しい情景が浮かび上がる。熱気のこもった講堂。整然と並んだ譜面台の列と、スポットライトを反射して黄金色に輝く楽器の数々。皆の息遣いが一つになる、あの最初の音が鳴り響く直前の、張り詰めた、けれどひどく心地よい静寂。僕はその中心にいた。仲間たちの頼もしげな視線を一身に集め、大きく息を吸い込む。空間を震わせる分厚い和音は、まるで自分たちが世界の中心にいるかのような万能感をくれた。誰もが同じ未来へ向かって、同じ旋律を奏でていると信じて疑わなかったあの夏。
+
+「あの頃は、本当に綺麗だったね」
+
+不意に、水溜まりの底から声がした。それは、今日から新しい街へ旅立ち、僕を置いて遠くの空へと羽ばたいていった、あの日の仲間たちの声が幾重にも重なったような響きだった。彼らの笑顔は光の中に溶け、やがて楽しげな足音とともに彼方へ遠ざかっていく。残されたのは、ただ一人、音の鳴らない部屋で立ち尽くす僕だけだ。
+
+見下ろせば、指先の透明さはすでに手首にまで達していた。美しい音楽の余韻が耳の奥で鳴り止まない分だけ、今のこの部屋の、耳鳴りがするほどの静寂がひどく痛かった。輝かしい過去の残響が、泥濘のように足に絡みつき、今の僕を何よりも鋭く責め立てているのだ。
+
+やがて、足元の水溜まりは音もなく干からびて消えた。光の粒も、彼らの足音も、幻のように空間に溶けてしまった。再び、あの年季の入った日焼けた天井の下に一人、取り残される。
+
+ふと視線をやると、部屋の片隅に、埃をかぶったアコースティック・ギターが壁に立てかけられていた。皆と奏でた華やかな音楽の代わりに、一人静かに爪弾くために置かれたはずのそれは、今の僕と同じように、深い沈黙という病に冒されているようだった。手首まで透明に透き通った腕を伸ばし、せめて一本でも弦に触れようとした。冷たいスチールの感触を確かめたかった。しかし、僕の指先は空しく虚空を切り、幾重にも張られた弦をただ幽霊のようにすり抜けてしまった。
+
+何の音も、鳴らなかった。
+
+僕はもう、この世界に自分の音を響かせることすらできないのだ。窓の外では、残酷なほどに暖かな春の風が吹き抜け、新しい鞄を提げた誰かの背中を力強く押しているのだろう。
+
+「こんな夢を見た」
+
+そう呟いて目を覚ますことができたら、どんなに救われるだろうか。けれど、肩にのしかかる真っ黒な重みだけは、どれだけ体が透明になろうとも、決して消えることはない。僕は静かに目を閉じた。透き通った頬を伝い落ちる一滴の冷たい雫だけが、今の僕が確かにここに存在しているという、ただ一つの証拠だった。
+
+果てしなく続く長い夜は、まだ始まったばかりである。`
+  },
+  {
+    id: 2,
+    title: "サッシ",
+    catchcopy: "死んだ祖母から、給食袋のメールが届いた。",
+    description: "人並みに生きてきた、人並みの私。今日も電話のふりをしながら乳酸菌飲料を買い、独自システムでメールを捌く。そんな平凡な朝に、七回忌を済ませた祖母からメールが届く。件名は「給食セット」。懐かしい匂いが漂い、気がつけば同僚たちが給食を食べていた。",
+    tags: "#日常の綻び #祖母 #記憶 #不思議",
+    body: `今の私ほど「しがない」という形容が似合う人はこの世にいない、と、いつも思いながら過ごしていた。人並みの家に生まれて人並みに育てられ、人並みの大学を出て中央値ぐらいの企業に入った。今は年相応の役職をもらい、いわゆる中間管理職予備軍ぐらいにいると思う。出世も人並みで同期の中でも多少できるやつぐらいに思われていたのだと思う。
+
+いつもの通り朝出社して、自分の机まで辿り着くまでに如何に誰からも話しかけられずに、それでいて全員に挨拶を自分からできるかという日課を見事達成し、肩をなでおろし、荷物も肩から撫で下ろした。今日も一日がんばろ。
+
+今日は家を出た後に家の伴を閉めたか心配になり戻ってしまうというワンクールに一度くらいある恒例行事の日で、それによって小走りで来たためちょっと喉が渇いていた。運動と呼ぶには易しいかもしれないが、それでもこの状態で飲む甘い炭酸系の飲料が一番美味しいことを私は知っていた。
+
+この場合、一度通った道を引き返して自販機に辿り着くことで、一度会った人とは挨拶も不要であるためスムーズに行くことができるとわかっていた。しかし私は今無性にその自販機にはなくて、別のところにある自販機にしかない乳酸菌系のそれを飲みたくて仕方がなかった。
+
+方法は決まっていた。電話作戦である。電話の応対をしているふりをすることにより、今日初めて会う人でも会釈程度で朝の挨拶を済ませることができるのだ。この作戦は非常に有用だが、一方で使う頻度が制限される。これは最近使っていなかったので今日が使い時ということになる。意を決してちょっとスマホにびっくり気がついたような仕草を見せ、カバンからスマホが出る前に大きめの声ではいと発した。すぐさまスマホを耳に当て、同僚に愛想よく会釈を連発した。順調に自販機に辿り着き、架空請求しながら本当はQR決済をしたかったが近くで談笑をしている同僚がいたせいで現金で支払った。デスクに戻り、（ここ重要）すぐさま切らず、ちょっと取り出しづらいところのファイルを出してペラペラめくり、架空請求ごっこを終わらせた。一件が落着した。
+
+次は兎にも角にもメールチェックである。私はこう見えても理系で、プログラミングは少々できるほうであるから、独自のメールボックスを我流で作ってある。これが優れもの。全然売りたい。システムによって振り分けられた重要度が、最も高いものからどんどんとタスクをこなしていった。
+
+……そんな私だ。気がつくと、そこに気になるメールが入っていた。差出人は去年7回忌を行った、祖母だった。件名は、給食セット。以下メール文である。
+
+なっちゃん、今日給食袋は持ちましたか？家にある数を数えてみると、どうも持っていってないように思われます。今から学校に持っていこうか？それから友達は大事にね。一生ものだから。
+
+身に覚えは全くなかった。こういう事は、はじめてだったので、あまり霊感とかそういうものを信じていない。私からすると、その時、ちょっとぎょっとしてもいいはずだが、なぜだか冷静だった。少し田舎の匂いがした。そんなことにそれなりの時間気をとられていた。
+
+正気に戻り、振り返ってみると、社員は皆給食を食べていた。懐かしい匂いがする。給食ワゴンの上に発泡スチロールのケースに入った麦ご飯と、近くの大きめのおそらく市が契約しているであろうパン屋の大きい箱の中に並べられているコッペパン、凸凹にゆがんでいるボールに入ったアーモンドの入ったサラダ。何味なのかわからないけど、とてもおいしいスープ。今日の主菜は照り焼きチキンカレーらしい。やっぱり鶏の皮が1番おいしいよなぁなどと思いながらお盆を取った。いつものように給食係に大盛りをせがむとちょっと多くしてくれた。ワクワクして席に着いて、しばらくすると、気になるあの子が前に出て、「おいしい給食いただきます。」と言った。その後に続いてみんなでいただきます、と手を合わせた。
+
+そういえば今日は朝バタバタしていたのを思い出した。カバンの中を探したが、箸とスプーンを忘れたらしい。スマホ耳に当て給食室へと足を進めた。`
+  },
+  {
+    id: 3,
+    title: "髪一重",
+    catchcopy: "目が合う。それだけで、一日が満ちてしまう。",
+    description: "男子校から共学の大学へ。世界が突如として変わった「僕」の視界に、長い髪を揺らすこのはが映り込む。授業中も、廊下でも、ただ彼女の存在だけが全ての重力になる。恋というより、引力。気づけば頬の動かし方も、歩き方も、わからなくなっていた。",
+    tags: "#片想い #大学生 #青春 #初恋の予感",
+    body: `大学に入って半月、男子校出身の僕にとっては相対的に女子校に来たような感じがした。男子校にいたが、別に接点がなかったわけでもないし、男子高校生の平均よりはそういう付き合いがあった方だと自認している。
+
+僕の人生のこれまでを振り返ってみると、小中高でも先生にペコペコして、成績ばかりを気にして生きてきた。小学校の時分、文系なら弁護士、理系なら医師と考えていた。我ながらませていたし、その頃から事なかれ主義でつまらない人生を送りそうな気があったらしい。
+
+そんなこんなで、今やむっつりと言われてしまうほど男子校生に染まってしまった僕は無論大学デビューなんてするはずもなく、かといって女子とはしゃべっている方だ。というか、中学校の化粧していない女子たちからいきなり化粧に手慣れた女子を前にすると見とれちゃなぁ。
+
+そんな僕に転機があった。ゼミだ。ゼミは自分で決めるのではなく大学側が決めていた。僕は助教の担当になった。面談をすることになり、部屋に行ってみるとすでに1人面談していた。女子のようだ。心がワクワクしていた。失礼しますと行って入ると、長い髪を振動させてこちらを振り返った。僕はなんていうか、くらっとした。くらっとして頬の筋肉をどう動かすんだったか忘れてしまったようだった。脚に何かのしかかっていてフラフラと先生が指した席についた。男子は拳を軽く握っておくのであってたっけ、と思っていた。名前はこのはをいうらしい。その後、彼女は面談が終わり去っていった。頭の中が彼女でいっぱいでだったので先生の話は全然入ってこなかった。いい夢を見た。
+
+翌る日、私はいつも通りそろそろシーズンアウトなコートを羽織って出掛けて行った。別に近くに住んでいる友達がいるわけではなかったので1人でトボトボと歩いていると、向かい側から友人が歩いてきた。名前は隆二といった。彼はイチローのなかなか面白いやつで、入学式の時から仲良くしていた。当たり障りのない話をしていると、前からこのはさんが歩いてきた。私は久しぶり、何を話せばいいのか、わからなくなり、歩み方を忘れながら近づいて行くと、リュウジも声が大きくなってきた。どうやら恋敵は多そうだ。一応顔見知りではあるので会釈をした。するとなんとしたことだ。にっこりと笑ってくれた。今となってはあれが100％善意によるものだと断言することができない。しかしその時はたまらなくたまらなかった。1日頑張る活力を得た。すぐさま隆二は私の方をチラッと見てニヤッとした。それを見て今のところは私はリードしているようだと安堵した。
+
+あの出来事からというもの、私は完全に虜になってしまった。授業の時も彼女が視界に入りながら前の板書が見える位置についた。私は男子校出身なので、学校内に女子がいるのは3年ぶり10回目ということになるわけだが、中学生の時分、気になっていた娘に同じようにジロジロ見ていたら、言い方が悪かった、目が引き込まれていたら、1日に2度ぐらい目が合っていた。あまりに目が合うので目が合うたびに笑われていたことを思い出す。その娘は本当に面白くて、魅力的に人だった。新体操が上手く、いうことが本当にユニークだった。内気な方で、休み時間は隣のクラスの唯一の親友とクラスの中間地点の廊下でだべっていた。私はある時勇気を以ってその2人の話の頃合いを見計らって話しかけてみた。すると、外から教室を見ていると動物園に来たような気分にらるといった。その発想、着眼点に惚れ込んだ。
+
+少し振り返りすぎたが、今、またその癖が再発しようとしている。そんなことを考えながら先生の言っていることを右から左へをしていたら、このはが振り返るモーションに入った。反射神経でもって避けようとする力と欲望が、。刹那の間に先制されてしまった。`
+  },
+  {
+    id: 4,
+    title: "勘当",
+    catchcopy: "人を見下し続けた末に、誰もいなくなった。",
+    description: "いじることで仲良くなる男子校流のコミュニケーションを卒業後も引きずったまま、医学部での人間関係を支配しようとした「僕」。派閥を束ね、多浪をいびり、距離を置かれても動じなかった。けれどある日気がつくと、学年でただひとりの留年生になっていた。",
+    tags: "#因果応報 #孤立 #プライド #大学生活",
+    body: `面白いことに一ヶ月大学生活をしているとだんだん板についてきた。部活やサークルも決まり、ある程度仲良くするグループも決まりつつある。しかし僕はこれまでの人生で最初のグループでそのまま卒業時までずっと続くことはないということを知っている。まして6年制のところであるから数回は変わるんだろう。
+
+そんなことを考えながらおそらくそんなには永続きをしないんであろう4人組（いつも準備不足で他力本願なくせに偉そうなやつ、多浪の傷が癒えていない何をやらせてもうまくないプライドが高いやつ、心優しいノリのわかるやつ、そして苦労しないでここまできたので人を小馬鹿にするのが生きがいだった僕）と学食で昼食をとっていた。今考えてみるとよくぞというメンバーだった。ここの構造は至ってシンプル。僕は多浪と他力本願を馬鹿にして、いじって、心優しいが程よくその場を収めるという感じだった。
+
+僕は男子校出身だったので、男子校の特有のコミュニケーションに慣れてしまった。簡単にいうと男子校コミュニケーションとは、相手をいじりながら仲良くなるというやつだ。その癖が抜けていないんだろう。でも、それにしても多浪も他力本願もあまりにも目に余った。これから苦労するだろうな。と上から目線で馬鹿にしていたことを思い出す。
+
+僕と多浪と心優しいは同じなあん式テニス部に入った。心優しいはバリバリの経験者で、めちゃくちゃ上手かった。僕は小学校の頃にちょっとやっていたのと球技は前半上手い方だった。多浪は未経験者だった。初日、僕たちは初心者と経験者で分かれよと言われた。もちろん、僕は初心者の方に加わり、男子は多浪と僕だけだったのでペアになった。僕は正直、結構いける方で、先輩からもお前はあっち加わってもいいよと言われた。そんなこんなで平凡な初心者のための講座が始まった。休憩時間、空いてるコートで打ってもいいと言われたので多浪と打つことにした。
+
+多浪は僕に踊らされてジタバタしていた。たまらなく気持ちよくなってきて僕はもっと攻めてみた。次第にやつがイラついてきているのがわかる。僕は性格がねぎ曲がっているので、もっと優しくしてあげないとね。と言ってやった。さらに苛立ち始めた。たまらなかった。しかし、僕だってミスすることはある。やつはここぞとばかりに喜び、煽ろうとする。それすらも、虫籠に入った虫が当たるはずないのに排泄物を勢いよく発射しているような感じがして気持ちよかった。
+
+練習の後、3人で帰ることになった。僕と心優しいは大いにテニスのことで盛り上がった。多浪はだんだんと会話に入れないことに不貞腐れ、イライラしてきた。これも僕の計算のうちだった。心優しいは心優しいので彼にも話を振ってあげていた。心優しいは少し天然なところがあって、僕でも反応に困る質問ばかりでそれが彼に油を注いだ。彼は別れの挨拶もしないまま去って行ってしまった。心優しいは彼が怒っていることに見当がついておらず、心配そうな顔をしていた。
+
+その晩、多浪から電話がかかってきた。内容は一方的で簡潔だった。距離を取りたい。というものだった。僕は、はいよ。とだけ応えた。僕の昔からの信条として、自分にも、友人にも期待しない。というものがあった。だから直接距離取りたいと言われたのは初めてだったのでちょっと面くらいはしたが、メンタルはびくともしなかった。それと同時に多浪にムカついてきた。
+
+僕は学年の男子の中では最大派閥を束ねていた。多くの人は見苦しいというかもしれないがよくよく考えてみると皆さんの周りもにも少なからず派閥が存在してどこかしらに所属しているだろう。多浪もこれに所属していた。僕は彼が僕に頭を下げるまで、この派閥では干す、勘当だと通達した。
+
+気づいたら、僕は学年で唯一の留年生となっていて、周りに誰もいなくなっていた。`
+  },
+  {
+    id: 5,
+    title: "匂いの記憶",
+    catchcopy: "翌朝、2人とも1人だった。",
+    description: "東京国際フォーラム、交響楽団の来日公演。隣の席に座った男と女は、偶然触れた素肌の感触でなにかを確かめ合い、自然と夜を共にした。愛でも恋でもなく、ただ残香として記憶に漂う一夜。映像ではなく匂いとして残るものを、人はなんと呼ぶのだろう。",
+    tags: "#一夜限り #官能 #都市 #残り香",
+    body: `2人は強く抱き合っていた。互いに体を強く求め合った。理性を無くし、本能のまま動いていた。不思議な力が働いているように、2人は出会い、そしてはじめてとは思えないほど互いを理解できていた。
+
+男は大学3回生だった。世にいうハイスペ男子で、それだという自認もあった。清潔感のためなら手段をいとわず、金もかけてきた。ガールフレンドは申し分ない美貌のものが自分の性欲を満たせる人数いたし、元カノとも総じて良好な関係を継続していた。この日は自宅のある麻布から有名な海外の交響楽団の来日公演を聴きに夢の東京国際フォーラムホールAにきていた。
+
+女は町工場の娘で27歳だった。一応大学を出て、あまりいい内定がもらえず、今は家業の工場で事務をしていた。いわゆる陰キャであったが顔立ちは整っており人並みの経験はあった。この日は友達と件のコンサートを聴くはずだったが、体調を崩したらしく仕方なく1人で行っていた。
+
+2人は隣の席だった。正確に言うと、女は友人が隣の席をとっていたことは知っていたことから、2席座ることができた。最初は男側でない方の隣が同年代の女性だったため最初はそちら寄りに座っていた。
+
+女は飢えていた。少し胸元のフランクな服を着ていた。何しろ職場は賞味期限のとっくに過ぎた小汚い男ばかりだった。男はいつでも飢えていた。お金と女はいくらあってもいいと思っていた。
+
+一部が終わり休憩となった。女が最初に立ち上がり、男の方からロビーに出ようとした。その時女の足の素肌と男の手が触れた。2人ともその時ある種のオーガズムに似たものを感じた。
+
+公演終了後、2人は自然と会話していた。波長があい、近くの居酒屋で飲むことにした。近況や出自、最終的には恋愛遍歴まで話した。もちろん互いにいいように加工をして話した。そうであることを互いに察しつつも、話は大いに盛り上がった。2人とも終電の時刻は知っていた。つまり、すんなりホテルに行くことが決まった。
+
+入室するや否や、女はそれまでずっと繋いでいた手をさらに強く、もう片方の手も繋ぎ、体を抱き寄せて口を近づけた。男は余裕な様子で、もうちょっと互いのことを知ってからでもおそくはないんじゃない、と言いながら舌を絡めた。
+
+翌朝起きると、男も女も1人だった。ただぼんやりと昨日の記憶が映像ではなく残香として2人の頭に匂っていた。2人はふっと笑ってもう一寝入りしようと布団を深く被った。`
+  },
+  {
+    id: 6,
+    title: "GWの遭遇",
+    catchcopy: "後部座席に、彼女はいた。いなくなった。",
+    description: "ゴールデンウィーク、独り焼きそば三人前。カフェで見た老夫婦の静かな愛に居た堪れなくなり、車に戻ると後部座席に見知らぬ美しい女がいた。「食べたい」とだけ言い残し、消えた。その一瞬で「僕」は、彼女と結婚したいと確信してしまった。",
+    tags: "#幽霊 #孤独 #GW #一目惚れ",
+    body: `ゴールデンウィークだというのに、僕は今も独りだ。やることがないので一日中布団をかぶって動画を見ていた。こんなことばかりしているから太るのだとわかっていても、世界が僕を肥えさせているのだから有り難く肥えるべきだ、という信条を持ち合わせていた。昼食に焼きそばを作った。何しろ麺類が好きで、その中でも油を直接食らっているような感覚になれる焼きそばが好きだった。最近は一人で三人前を余裕を持って食べられるようになってしまった。
+
+このままでは社会から離され過ぎてしまうという危機感があった。この五日間のうちに世界はおそらく一ヶ月分くらい楽しむのに、僕はおそらく一日分も充実しないだろう。よって、今日は背伸びをしてカフェに赴くことにした。唯一の武器、マックブックを携えて。
+
+カフェは非常に混雑していた、中は幸せな声で飽和していた。家族や恋人、友人など、愛する人と共に新生活の疲れを癒しあっていた。皆人生は夢だらけだと声高らかに発信する根拠と自信があるようだった。
+
+隣に老婆が座った。綺麗なお婆さんだった。鍔のひろい帽子を脱ぐと、自分も昔そうだったというように若いカップルを見守っていた。程なくして、老爺が二人分のコーヒーをお揃いのカップに入れて、お待たせと言いながら近づいてきた。僕はひどく嫉妬すると共に将来こうありたいと強く願った。老爺はコーヒーを飲むや否や、むせてコーヒーを吹き出した。老婆は慣れているらしく、阿吽の呼吸で背中を叩いたり、掃除したりと介抱した。老婆は一言も不平を滴れることなく、むしろ老爺を気遣った。老爺は落ち着きを取り戻し、老婆に静かに謝っていた。老婆は別に気にしていない様子でケーキの半欠けを指して、残りは全部食べなと促した。
+
+僕は居た堪れなくなった。これまでの僕の人生がこれからの僕の人生を応援しているとは到底思えなかった。むしろ深い禍根を残し、ことあるごとにブレーキをかけてくるんだろうなと想像できた。どこに行ってもやはり一人で、それでも一人でこの世をうまく生きていけるほどの能力があるとは思えなかった、それでも世界は僕を苦しめながら生かしているという残酷な事実に気づいていた。やけに冷たいフラペチーノをすぐに飲み干し、こんなことならテイクアウトにすればよかったと2％を惜しみながら店を後にすると、外はどんよりと今にも雨が降りそうだった。ふと洗濯物を干したままであったことを思い出した。
+
+急いでアクセルを踏み込むと、違和感があった、後部座席に人影があった。背中が凍りつくような感じがあった、唐突に、女の声があった。その瞬間、一種の郷愁を覚えた。一気に緊張が解け、懐かしい匂いが鼻を掠めた。振り向くと、色白で、髪の長い生気のない美しい女が座っていた。鼻筋は綺麗に通り、目は真珠のように大きく、世の中の内側を見ているようだった。女は、舐めるように僕を見て、ぼそっと、「食べたい。」とだけ言った。するとさっと跡形もなく消えた。
+
+一瞬の夢のようだった。僕は惚れ込んでしまった。体が欲しいとかではなく、単純に結婚したいと思った。彼女となら幸せな家庭を築けると確信した。以降、彼女という概念が僕の頭から離れることはなかった。彼女は常に僕の頭の中で妖艶に佇み、逆に僕は彼女の思考の中にいるようだった。`
+  },
+  {
+    id: 7,
+    title: "軋響",
+    catchcopy: "連絡しなかった。それだけのことだった。",
+    description: "恋人がいながら繋がり続けた男と女。体の相性だけが全てで、感情は名付けられないまま半年の沈黙に耐え、待ち合わせ場所に友人を送り込まれ、それでも続いた。やけに綺麗だったある夜を最後に、連絡は途絶えた。階段下のソファで、古いメモを見つけるまで。",
+    tags: "#セフレ #曖昧な関係 #終わりの始まり #記憶",
+    body: `ポケットの中に手を入れてみると、何か応えがあった。いつものようにどこかのレシートかなと思って見てみるとシワシワになったメモ書きが出てきた。見たところ洗濯にかけられているようではない。見当がつかないまま中を開いてみると、丸い小さい優しい字で、階段下のソファにて。とあった。焦燥に駆られる感があった。大事なものが崩れ落ちている音がした。仕事が残ってはいたが、自然とそっちの方へ向かっていた。次第に歩が早まっていた。
+
+ついてみると、そこには何もなかった。意外にも空間は広く、3人がけのソファが2台、テーブルに向かい合って置いてあった。何も、誰もいないことを確認できて僕はホッとした。そのままソファに座ってみることにした。
+
+深く沈んだ。軋む音も懐かしく匂った。
+
+油断した。女と僕は互いに恋人がいた。それでも互いに奥で繋がっていた。僕は顔以外はスペックが高い自認はあった。それでも、おそらく、僕も女も互いに好意があった訳ではなかったと思う。何しろ体の相性が極めてよかった。互いに互いの恋人と旅行に行ったり、ご飯を食べたり、いいことしたりした話を持ち寄って、それも含めて前戯みたいになってた。
+
+女は魔性だった。これは当時からわかっていたことだが、僕はこの女しかいなかったが、女は何人もいた。今のところ僕が最長だとか、他の男がどうとかの話もしていた。僕たちは会うと毎回する関係だった。合目的的な関係を旨としていたのであまり前段階の飲みとか、お出かけは簡素だった。世の中は僕たちのことをセフレとか、都合のいい関係とかいうのだろう。世間が名づけようと振りかぶる単語は全てすでに肯定されていた。
+
+あえて半年間消息を途絶えさせられたり、待ち合わせ場所に友達を送り込まれたりした。意味わかんないけどいつも新しい世界に導いてくれるような高揚感があった。女の顔は喜怒哀楽どんな顔をしても色気があった。別に美人ではなかったし可愛いわけでもなかった。ただ、顔が小さくて、目が顔に占める割合が高かった。目が澄んでいて声が高かった。いつも外では気丈に振る舞っていた。でも僕といる時は泣いたり、悪口が滝のように出てきたり、とにかく汚い言葉を大きめの紙に整列させて書いてたり、情緒がおかしくなったりしていた。
+
+ある日、綺麗な夜を過ごした。今考えてみると、やけに綺麗だった。それから、連絡が来なくなった。連絡が取れなくなったのではなく、あちらも、こちらも、連絡しなかった。魅力的な日々だった。だからこそ今になってこんな形で思い出したんだろう。
+
+メモに目をやると、見覚えがあった。`
+  }
+];
+
+// ── データ取得 ──
+async function fetchWorks() {
+  if (GAS_URL === 'YOUR_GAS_URL_HERE') {
+    return FALLBACK_DATA;
+  }
+  try {
+    const res = await fetch(GAS_URL);
+    const works = await res.json();
+    return works.filter(w => w.title).map((w, i) => ({ id: i + 1, ...w }));
+  } catch (e) {
+    console.warn('データ読み込み失敗。サンプルデータを表示します。', e);
+    return FALLBACK_DATA;
+  }
+}
+
+// ── レンダリング ──
+let allWorks = [];
+let currentIndex = 0;
+
+function renderWorks(works) {
+  const grid = document.getElementById('worksGrid');
+  document.getElementById('statNum').textContent = works.length;
+  if (!works.length) {
+    grid.innerHTML = '<div class="error-msg">作品が見つかりませんでした。</div>';
+    return;
+  }
+  grid.innerHTML = works.map((w, i) => `
+    <div class="work-item" data-index="${i}" role="button" tabindex="0">
+      <div class="work-num">${String(i + 1).padStart(2, '0')}.</div>
+      <div class="work-body">
+        <h2 class="work-title">${w.title}</h2>
+        <p class="work-catch">${w.catchcopy || ''}</p>
+        <p class="work-desc">${w.description || ''}</p>
+        <div class="work-tags">${(w.tags || '').split(/\s+/).filter(Boolean).map(t => `<span class="work-tag">${t}</span>`).join('')}</div>
+      </div>
+      <div class="work-arrow">→</div>
+    </div>
+  `).join('');
+
+  // scroll animation
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.work-item').forEach((el, i) => {
+    el.style.transitionDelay = `${i * 0.06}s`;
+    observer.observe(el);
+    el.addEventListener('click', () => openModal(i));
+    el.addEventListener('keydown', e => { if (e.key === 'Enter') openModal(i); });
+  });
+}
+
+// ── モーダル ──
+function openModal(index) {
+  currentIndex = index;
+  const w = allWorks[index];
+  document.getElementById('modalTitle').textContent = w.title;
+  document.getElementById('modalCatch').textContent = w.catchcopy || '';
+  const bodyEl = document.getElementById('modalText');
+  bodyEl.innerHTML = (w.body || '').split(/\n\n+/).map(p => `<p>${p.replace(/\n/g, '<br>')}</p>`).join('');
+  document.getElementById('modalTags').innerHTML = (w.tags || '').split(/\s+/).filter(Boolean).map(t => `<span class="modal-tag">${t}</span>`).join('');
+  document.getElementById('modalPrev').disabled = index === 0;
+  document.getElementById('modalNext').disabled = index === allWorks.length - 1;
+  document.getElementById('modalOverlay').classList.add('open');
+  document.getElementById('modal').scrollTop = 0;
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('modalOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.getElementById('modalClose').addEventListener('click', closeModal);
+document.getElementById('modalOverlay').addEventListener('click', e => { if (e.target === e.currentTarget) closeModal(); });
+document.getElementById('modalPrev').addEventListener('click', () => { if (currentIndex > 0) openModal(currentIndex - 1); });
+document.getElementById('modalNext').addEventListener('click', () => { if (currentIndex < allWorks.length - 1) openModal(currentIndex + 1); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+// ── 起動 ──
+(async () => {
+  allWorks = await fetchWorks();
+  renderWorks(allWorks);
+})();
+</script>
+</body>
+</html>
